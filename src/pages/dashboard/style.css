@@ -1,0 +1,26 @@
+.grid-case{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 12px;
+}
+.box-case{
+    background-color: #fff;
+    border-radius: 6px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0px 5px 10px 1px #d0d0d0;
+}
+.box-case a{
+    color: #ca1619;    
+}
+.box-case a:hover{
+    color: #7e0608;    
+    text-decoration: none;
+}
+.icon-trash{
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}

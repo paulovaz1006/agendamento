@@ -1,0 +1,31 @@
+.grid-new-case{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 12px;
+}
+.box-new-case{
+    background-color: #eee;
+    border-radius: 6px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+.box-new-case a{
+    color: #333;
+}
+.box-new-case a:hover{
+    color: #333;
+    text-decoration: none;
+}
+.icon-trash{
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+.img-profile{
+    max-width: 350px;
+}
+.img-profile img{
+    border-radius: 60%;
+}

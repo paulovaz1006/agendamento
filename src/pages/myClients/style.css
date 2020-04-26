@@ -1,0 +1,57 @@
+.grid-case{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 12px;
+}
+.box-case{
+    background-color: #fff;
+    border-radius: 6px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0px 5px 10px 1px #d0d0d0;
+}
+.box-case a{
+    color: #ca1619;    
+}
+.box-case a:hover{
+    color: #7e0608;    
+    text-decoration: none;
+}
+.icon-trash{
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+.actions-clients{
+    padding-bottom: 0!important;
+    padding-top: 8px!important;
+}
+.actions-clients ul{
+    list-style-position: inside;
+    display: flex;
+    margin-bottom: 0;
+}
+.actions-clients ul li{
+    list-style: none;
+    background: #009688;    
+    border-radius: 6px;
+    padding:2px 12px 5px 12px;
+    margin-right: 10px;
+}
+.actions-clients ul li button{
+    border: 0;
+    font-size: 14px;
+    color: #fff;    
+    background: transparent;
+}
+.actions-clients ul li button span{
+    margin-left: 5px;
+}
+.actions-clients ul li:last-of-type{
+    background: #d93025;
+}
+.modal {
+    background: #000c;
+}
