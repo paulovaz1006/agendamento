@@ -7,8 +7,10 @@ import Dashboard from './pages/dashboard';
 import NewCases from './pages/newCases';
 import NewCasesDetails from './pages/newCases/newCasesDetails';
 import CasesDetails from './pages/dashboard/casesDetails';
-import RegisterNewsCase from './pages/registerNewsCase';
+import ConfirmAppointments from './pages/schedules/confirmAppointments';
+import Schedules from './pages/schedules/schedules';
 import MyClients from './pages/myClients';
+import ServiceList from './pages/myServices/serviceList';
 
 export default function Routes() {
     return(
@@ -22,7 +24,9 @@ export default function Routes() {
                 <Route path="/novos-casos" activeClassName="activeLink" component={NewCases} />
                 <Route path="/detalhes-caso" activeClassName="activeLink" component={NewCasesDetails} />
                 <Route path="/meu-caso/:id" activeClassName="activeLink" component={CasesDetails} />
-                <Route path="/cadastrar-caso" activeClassName="activeLink" component={RegisterNewsCase} />
+                <Route path="/confirmar-agendamentos" activeClassName="activeLink" component={ConfirmAppointments} />
+                <Route path="/ver-agendamentos" activeClassName="activeLink" component={Schedules} />
+                <Route path="/lista-de-servicos" activeClassName="activeLink" component={ServiceList} />
             </Switch>
         </BrowserRouter>
     )

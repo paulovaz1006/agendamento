@@ -55,7 +55,7 @@ const Login = () => {
                         <input placeholder="Seu Usuário"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)} />
-                        <input placeholder="Sua Senha"
+                        <input type="password" placeholder="Sua Senha"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)} />
                         <div className="btn-logins">

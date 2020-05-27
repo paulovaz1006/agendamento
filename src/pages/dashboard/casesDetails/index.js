@@ -42,8 +42,8 @@ const newCases = () => {
                                     <label>Progreso</label>
                                     <p>progreso</p>
                                     <div className="row mt-3">
-                                        <button className="ml-3 btn-primary-angeluz">Cancelar Proposta</button>
-                                        <Link to="/dashboard" className="ml-3 btn-secundary-angeluz">Voltar</Link>
+                                        <button className="ml-3 btn-primary-schedule">Cancelar Proposta</button>
+                                        <Link to="/dashboard" className="ml-3 btn-secundary-schedule">Voltar</Link>
                                     </div>
                                 </form>
                             </div>

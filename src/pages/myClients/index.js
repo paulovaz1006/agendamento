@@ -4,9 +4,12 @@ import Header from '../layouts/header';
 import TitleHeader from '../layouts/titleHeader';
 import { FaWhatsapp, FaEnvelope } from 'react-icons/fa';
 import ModalClient from './modal/contactClient';
+import ModalDeleteClient from './modal/deleteClient';
+import ModalUpdateClient from './modal/updateClient';
 import './style.css';
 
 const MyClients = () => {
+    const [ name, setName ] = useState('');
     const [ id, setId ] = useState('');
     const clients = [
         {
@@ -14,7 +17,7 @@ const MyClients = () => {
             name:'Paulo',
             address: 'rua fidelandia',
             phone: '11954472836',
-            whatsapp: '5511954472836',
+            whatsapp: '11954472836',
             email: 'pvaz1006@gmail.com',
             company: 'crystale'
         },
@@ -23,7 +26,7 @@ const MyClients = () => {
             name:'Paulo',
             address: 'rua fidelandia',
             phone: '11954472836',
-            whatsapp: '5511954472836',
+            whatsapp: '11954472836',
             email: 'pvaz1006@gmail.com',
             company: 'crystale'
         },
@@ -32,7 +35,7 @@ const MyClients = () => {
             name:'Paulo',
             address: 'rua fidelandia',
             phone: '11954472836',
-            whatsapp: '5511954472836',
+            whatsapp: '11954472836',
             email: 'pvaz1006@gmail.com',
             company: 'crystale'
         },
@@ -40,15 +43,30 @@ const MyClients = () => {
 
     const sendMessageWhatsapp = ( name, whatsapp, company) => {
         let message = `Meu nome é ${name} da empresa ${company}`;
-        let url = `https://api.whatsapp.com/send?phone=${whatsapp}&text=%20${message}`;
+        let url = `https://api.whatsapp.com/send?phone=55${whatsapp}&text=%20${message}`;
 
         return window.open(url, '_blank');
     }
 
-    const openModalContactClient = (id) => {
+    const openModalContactClient = (id, name) => {
         let modal = document.querySelector('#modalClient');
         modal.style.display = 'block';
         setId(id);
+        setName(name);
+    }
+
+    const openModalDeleteClient = (id, name) => {
+        let modal = document.querySelector('#modalDeleteClient');
+        modal.style.display = 'block';
+        setId(id);
+        setName(name);
+    }
+
+    const openModalUpdateClient = (id, name) => {
+        let modal = document.querySelector('#modalUpdateClient');
+        modal.style.display = 'block';
+        setId(id);
+        setName(name);
     }
 
     return(
@@ -68,6 +86,7 @@ const MyClients = () => {
                                     <th className="border-0">Whatsapp</th>
                                     <th className="border-0">E-mail</th>
                                     <th className="border-0">Entrar em Contato:</th>
+                                    <th className="border-0">Ações:</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -88,9 +107,23 @@ const MyClients = () => {
                                                             </button>
                                                         </li>
                                                         <li>
-                                                            <button onClick={() => openModalContactClient(data.id)}>
+                                                            <button onClick={() => openModalContactClient(data.id, data.name)}>
                                                                 <FaEnvelope fontSize={18}/>
                                                                 <span>E-mail</span>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                                <td className="actions-clients">
+                                                    <ul>
+                                                        <li>
+                                                            <button onClick={() => openModalUpdateClient(data.id, data.name)}>
+                                                                <span>Alterar</span>
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <button onClick={() => openModalDeleteClient(data.id, data.name)}>
+                                                                <span>Excluir</span>
                                                             </button>
                                                         </li>
                                                     </ul>
@@ -103,7 +136,9 @@ const MyClients = () => {
                     </div>
                 </div>
             </div>
-            <ModalClient id={id}/>
+            <ModalClient id={id} name={name}/>
+            <ModalDeleteClient id={id} name={name}/>
+            <ModalUpdateClient id={id} name={name}/>
         </div>
     )
 }

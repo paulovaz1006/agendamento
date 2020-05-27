@@ -43,8 +43,8 @@ const newCasesDetails = () => {
                                     <label>De quanto tempo você precisa para finalizar o trabalho?</label>
                                     <input type="text"/>
                                     <div className="row mt-3">
-                                        <button className="ml-3 btn-primary-angeluz">Enviar Proposta</button>
-                                        <Link to="/novos-casos" className="ml-3 btn-secundary-angeluz">Cancelar</Link>
+                                        <button className="ml-3 btn-primary-schedule">Enviar Proposta</button>
+                                        <Link to="/novos-casos" className="ml-3 btn-secundary-schedule">Cancelar</Link>
                                     </div>
                                 </form>
                             </div>

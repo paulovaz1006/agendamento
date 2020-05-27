@@ -11,6 +11,18 @@ const titleHeader = (props) => {
                 title = 'Meus Clientes';
                 subTitle = 'Veja todos os seus clientes e suas informações';
                 break;
+            case'confirmAppointments':
+                title = 'Confirmar Agendamentos';
+                subTitle = 'Veja todos os seus pré agendamentos';
+                break;
+            case'schedules':
+                title = 'Ver Agendamentos';
+                subTitle = 'Veja todos os agendamentos do dia e do mês';
+                break;    
+            case'serviceList':
+                title = 'Lista de Serviços';
+                subTitle = 'Veja todos os seus serviços';
+                break;
             default:
                 title = '';
                 subTitle = '';

@@ -1,0 +1,11 @@
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/bootstrap/main.css';
+@import 'https://use.fontawesome.com/releases/v5.0.6/css/all.css';
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
+.fc-toolbar h2, .fc-title{
+    text-transform: capitalize;
+}
+.fc-event{
+    cursor: pointer;
+}

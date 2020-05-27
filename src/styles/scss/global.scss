@@ -24,11 +24,18 @@ form{
         color: #333;
         border: 1px solid #dcdce6;
         border-radius: 8px;
-        padding: 0 24px;
+        padding: 8px;
         margin-top: 10px;
     }
     select{
         margin-top: 10px;
+        width: 100%;
+        color: #333;
+        border: 1px solid #dcdce6;
+        border-radius: 8px;
+        padding: 8px;
+        line-height: 24px;
+        resize: vertical;
     }
     textarea{
         width: 100%;
@@ -36,7 +43,7 @@ form{
         color: #333;
         border: 1px solid #dcdce6;
         border-radius: 8px;
-        padding: 16px 24px;
+        padding: 8px;
         line-height: 24px;
         resize: vertical;
     }
@@ -81,27 +88,31 @@ button{
        margin-right: 8px;
     }
 }
-.btn-secundary-angeluz{
+.btn-secundary-schedule{
     background: #f3b838;
-    color: #fff;
-    padding: 10px 45px;
+    color: #fff!important;
+    padding: 5px 25px;
     font-size: 16px;
+    border: 0;
     border-radius: 6px;
-    max-width: 180px;
     text-align: center;
+    height: fit-content;
+    cursor: pointer;
     &:hover{
         text-decoration: none;
         color: #fff;
     }
 }
-.btn-primary-angeluz{
+.btn-primary-schedule{
     background: #af1013;
     border: 0;
-    padding: 10px 45px;
+    padding: 5px 25px;
     font-size: 16px;
     border-radius: 6px;
-    color: #fff;
+    color: #fff!important;
     text-decoration: none;
+    height: fit-content;
+    cursor: pointer;
     &:hover{
         color: #fff;
         text-decoration: none;
