@@ -1,12 +1,11 @@
 .logon-container{
     width: 100%;
-    max-width: 1120px;
     height: 100vh;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: row;
 }
 .register-container content{
     width: 100%;
@@ -22,6 +21,10 @@
     width: 100%;
     max-width: 420px;
 }
+.div-social{
+    height: 100%;
+    background: #9c74bf;
+}
 
 .logon-container section.form form{
     margin-top: 10px;
@@ -36,11 +39,35 @@
 }
 .container-form{
     display: flex;
-    padding: 32px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px #a5a5a5;
-    background: #fff;
     align-items: center;
+    flex-direction: column;
+}
+.buttons-login{
+    position: absolute;
+    right: 0;
+    top: 40%;
+    width: 110px;
+    margin-bottom: 0;
+}
+.buttons-login li{
+    list-style: none;
+    text-align: right;
+}
+.buttons-login li button{
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 3px 10px;
+    color: #fff;
+    text-align: right;
+}
+.list-social{
+    list-style-position: inside;
+    padding: 0;
+}
+.list-social li{
+    list-style: none;
+    margin-bottom: 5px;
 }
 .btn-logins{
     display: flex;

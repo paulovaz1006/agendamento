@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './style.css';
-import { FiLogIn } from 'react-icons/fi'
+import { FiLogIn, FiFacebook, FiInstagram } from 'react-icons/fi'
 import logoImg from '../../assets/images/logo.png';
 import { Link, useHistory } from 'react-router-dom';
 // import api from '../../../services/api';
@@ -45,36 +45,43 @@ const Login = () => {
 
     return(
         <div className="logon-container">
-             <Link to="/">
-                <img src={logoImg} alt="Heroes" className="herosImg"/>
-             </Link>
-             <div className="container-form">
-                <section className="form">
-                    <h1>Login</h1>
-                    <form>
-                        <input placeholder="Seu Usuário"
-                                value={email}
-                                onChange={e => setEmail(e.target.value)} />
-                        <input type="password" placeholder="Sua Senha"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)} />
-                        <div className="btn-logins">
-                            <FormControlLabel
-                                control={<Checkbox checked={state.checkedA} 
-                                onChange={handleChange} 
-                                name="checkedA" />}
-                                label="Lembrar Senha"
-                                className="checkItem mt-2"
-                            />
-                            <Link className="back-link" to="/esqueceu-a-senha">Esqueceu a Senha?</Link>
-                        </div>
-                        <button className="button" type="submit" onClick={loga}>Login</button>
-                        <Link className="back-link" to="/cadastro-de-clientes">
-                            <FiLogIn size={16} color="#ba151c"/>
-                           Cadastre-se
-                        </Link>
-                    </form>
-                </section>
+            <div className="col-md-4 div-social">
+                <h5 className="text-white mt-2">Redes Sociais</h5>
+                <ul className="list-social">
+                    <li>
+                        <Link to=""><FiFacebook /></Link>
+                    </li>
+                    <li>
+                        <Link to=""><FiInstagram /></Link>
+                    </li>
+                    <li>
+                        <Link to=""><FiFacebook /></Link>
+                    </li>
+                </ul>
+                <div className="buttons-login">
+                    <ul>
+                        <li>
+                            <button>Login</button>
+                        </li>
+                        <li>
+                            <button>Cadastre-se</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div className="col-md-8 container-form">
+                <Link to="/">
+                    <img src={logoImg} alt="Heroes" className="herosImg"/>
+                </Link>
+                <form>
+                    <input placeholder="Seu Usuário"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)} />
+                    <input type="password" placeholder="Sua Senha"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)} />
+                    <button className="button" type="submit" onClick={loga}>Entrar</button>
+                </form>
             </div>
         </div>
     )
