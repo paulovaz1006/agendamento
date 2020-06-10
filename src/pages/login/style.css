@@ -3,7 +3,7 @@
     height: 100vh;
     margin: 0 auto;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     flex-direction: row;
 }
@@ -24,6 +24,8 @@
 .div-social{
     height: 100%;
     background: #9c74bf;
+    background: url(../../assets/images/unnamed.jpg);
+    background-size: cover;
 }
 
 .logon-container section.form form{
@@ -52,12 +54,54 @@
 .buttons-login li{
     list-style: none;
     text-align: right;
+    transition:0.5s all linear;
+    border-radius: 12px 0 0 12px;
+    margin-bottom: 20px;
+}
+.buttons-login li.active{
+background: #fff;
+}
+.buttons-login li.active button{
+    color: #442a71;
+}
+.buttons-login li.active::before{
+    background: #000;
+    height: 100px;
+    width: 100px;
+}
+.buttons-login li.active::after{
+    background: #000;
+    height: 100px;
+    width: 100px;
+}
+.buttons-login li:hover{
+    background: #fff;
+}
+.buttons-login li::before{
+    background: #fff;
+    height: 10px;
+    width:10px;
+}
+.max-width-login{
+    max-width:450px;
+    width: 100%;
+}
+.buttons-login li button:hover{
+    color:#442a71;
+}
+.buttons-login li button:focus {
+    outline: none;
+}
+*:focus {
+    outline: none!important;
 }
 .buttons-login li button{
+    transition:0.5s all linear;
     width: 100%;
     border: 0;
+    display: block;
     background: transparent;
-    padding: 3px 10px;
+    padding: 7px 10px;
     color: #fff;
     text-align: right;
 }
@@ -68,6 +112,9 @@
 .list-social li{
     list-style: none;
     margin-bottom: 5px;
+}
+.list-social li a{
+    color: #fff;
 }
 .btn-logins{
     display: flex;

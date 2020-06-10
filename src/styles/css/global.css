@@ -24,8 +24,9 @@ form input {
   width: 100%;
   height: 40px;
   color: #333;
-  border: 1px solid #dcdce6;
-  border-radius: 8px;
+  border: none;
+  border-bottom: 1px solid #dcdce6;
+  border-radius: 0;
   padding: 8px;
   margin-top: 10px;
 }
@@ -58,7 +59,7 @@ button {
   cursor: pointer;
   width: 100%;
   height: 40px;
-  background: #ba151c;
+  background: #9c74bf;
   border: 0;
   border-radius: 8px;
   color: #fff;

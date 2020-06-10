@@ -4,6 +4,8 @@ import Logo from '../../../assets/images/logo.png';
 import RegisterSchedule from '../../schedules/registerSchedule/modal/';
 import RegisterClients from '../../myClients/registerClients/';
 import './style.css';
+import { FiDatabase } from 'react-icons/fi';
+import { FaTachometerAlt, FaUsers, FaCalendarCheck, FaBook, FaDollarSign, FaSignOutAlt } from 'react-icons/fa';
 
 const SideBar = () => {
 
@@ -21,10 +23,14 @@ const SideBar = () => {
 
     return(
         <div id="sidebar-wrapper">
-          <div className="sidebar-heading"><img src={Logo} alt="Angeluz" className="w-100"/></div>
+          <div className="sidebar-heading bg-header-sidebar">
+            <div className="img-photo">
+              <img src={Logo} alt="Angeluz" className="w-100"/>
+            </div>
+          </div>
           <div className="list-group list-group-flush">
             <div className="box-sidebar">
-              <span>Dashboard</span>
+              <span><FaTachometerAlt /> Dashboard</span>
               <ul>
                 <li>
                   <Link to="/dashboard" className="list-group-item list-group-item-action border-0">Painel de Controle</Link>
@@ -32,7 +38,7 @@ const SideBar = () => {
               </ul>
             </div>
             <div className="box-sidebar">
-              <span>Clientes</span>
+              <span><FaUsers /> Clientes</span>
               <ul>
                 <li>
                   <Link to="/meus-clientes" className="list-group-item list-group-item-action border-0">Meus Clientes</Link>
@@ -41,7 +47,7 @@ const SideBar = () => {
               </ul>
             </div>
             <div className="box-sidebar">
-              <span>Serviços</span>
+              <span><FaBook /> Serviços</span>
               <ul>
                 <li>
                   <Link to="/dashboard" className="list-group-item list-group-item-action border-0">Ver Serviços</Link>
@@ -52,7 +58,7 @@ const SideBar = () => {
               </ul>
             </div>
             <div className="box-sidebar">
-              <span>Agendamentos</span>
+              <span><FaCalendarCheck /> Agendamentos</span>
               <ul>
                 <li>
                   <Link to="#" className="list-group-item list-group-item-action border-0" onClick={openModalRegisterSchedule}>Agendar Cliente</Link>
@@ -66,7 +72,7 @@ const SideBar = () => {
               </ul>
             </div>
             <div className="box-sidebar">
-              <span>Financeiro</span>
+              <span><FaDollarSign /> Financeiro</span>
               <ul>
                 <li>
                   <Link to="/dashboard" className="list-group-item list-group-item-action border-0">Pagamentos</Link>
@@ -74,7 +80,7 @@ const SideBar = () => {
               </ul>
             </div>
             <div className="box-sidebar">
-              <span>Logout</span>
+              <span><FaSignOutAlt /> Logout</span>
               <ul>
                 <li>
                   <Link to="/" className="list-group-item list-group-item-action border-0">Sair</Link>

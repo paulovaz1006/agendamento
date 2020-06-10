@@ -2,7 +2,7 @@ import React from 'react';
 import { FaUser } from 'react-icons/fa';
 import './style.css';
 
-const titleHeader = (props) => {    
+const titleHeader = (props) => {
     let title, subTitle;
 
     const componentTitle = () => {
@@ -18,7 +18,7 @@ const titleHeader = (props) => {
             case'schedules':
                 title = 'Ver Agendamentos';
                 subTitle = 'Veja todos os agendamentos do dia e do mês';
-                break;    
+                break;
             case'serviceList':
                 title = 'Lista de Serviços';
                 subTitle = 'Veja todos os seus serviços';
@@ -33,7 +33,7 @@ const titleHeader = (props) => {
     componentTitle();
 
     return(
-        <div className="app-page-title px-3 py-4 mb-4">
+        <div className="app-page-title ml-3 px-3 py-4 mb-4">
             <div className="page-title-wrapper">
                 <div className="page-title-heading">
                     <div className="page-title-icon">
