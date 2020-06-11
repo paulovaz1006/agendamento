@@ -8,7 +8,7 @@
     -moz-transition: margin .25s ease-out;
     -o-transition: margin .25s ease-out;
     transition: margin .25s ease-out;
-    box-shadow: 0px 0px 15px 0px #474747;
+    box-shadow: 0px 0px 22px 0px #dbdbdb;
     max-width: 240px;
   }
   #sidebar-wrapper .sidebar-heading {
@@ -40,6 +40,9 @@
     background: #281a56;
     display: flex;
     justify-content: center;
+    background: url(../../../assets/images/unnamed.jpg);
+    background-size: cover;
+    box-shadow: 0 0 15px 0 #4b4b4b;
   }
   .list-group-item-action:focus,
   .list-group-item-action:hover{

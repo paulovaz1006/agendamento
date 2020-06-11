@@ -23,7 +23,7 @@ const SideBar = () => {
 
     return(
         <div id="sidebar-wrapper">
-          <div className="sidebar-heading bg-header-sidebar">
+          <div className="sidebar-heading bg-header-sidebar mb-3">
             <div className="img-photo">
               <img src={Logo} alt="Angeluz" className="w-100"/>
             </div>
