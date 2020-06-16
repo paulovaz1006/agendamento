@@ -1,62 +1,46 @@
 import React from 'react';
 import {
     FaUsers,
-    FaTachometerAlt,
     FaBook,
     FaCalendarCheck,
-    FaDollarSign,
-    FaSignOutAlt
 } from 'react-icons/fa';
 import './style.css';
 
 const titleHeader = (props) => {
-    let title, subTitle, icon;
+    let title, subTitle = '';
 
-    const componentTitle = () => {
-        switch(props.componentTitle) {
-            case'myClients':
-                title = 'Meus Clientes';
-                subTitle = 'Veja todos os seus clientes e suas informações';
-                icon = '<FaUsers className="bg-happy-itmeo" />';
-                break;
-            case'confirmAppointments':
-                title = 'Confirmar Agendamentos';
-                subTitle = 'Veja todos os seus pré agendamentos';
-                icon = '<FaCalendarCheck className="bg-happy-itmeo" />';
-                break;
-            case'schedules':
-                title = 'Ver Agendamentos';
-                subTitle = 'Veja todos os agendamentos do dia e do mês';
-                icon = '<FaCalendarCheck className="bg-happy-itmeo" />';
-                break;
-            case'serviceList':
-                title = 'Lista de Serviços';
-                subTitle = 'Veja todos os seus serviços';
-                icon = '<FaBook className="bg-happy-itmeo" />';
-                break;
-            default:
-                title = '';
-                subTitle = '';
-                icon = `<FaUsers className="bg-happy-itmeo" />`;
-                break;
-        }
-
-        return (
-            <div className="page-title-heading">
-                <div className="page-title-icon">
-                    {icon}
-                </div>
-                <div>{title}
-                    <div className="page-title-subheading">{subTitle}</div>
-                </div>
-            </div>
-        )
+    const infoTitleHeader = () => {        
+        if (props.componentTitle === 'schedules') {
+            title = 'Ver Agendamentos';
+            subTitle = 'Veja todos os agendamentos do dia e do mês';
+            return (<FaBook className="icon-sub-title" />)
+        } else if (props.componentTitle === 'myClients') {
+            title = 'Meus Clientes';
+            subTitle = 'Veja todos os seus clientes e suas informações';
+            return (<FaUsers className="icon-sub-title" />)
+        } else if (props.componentTitle === 'confirmAppointments') {
+            title = 'Confirmar Agendamentos';
+            subTitle = 'Veja todos os seus pré agendamentos';
+            return (<FaCalendarCheck className="icon-sub-title" />)
+        } else if (props.componentTitle === 'serviceList') {
+            title = 'Lista de Serviços';
+            subTitle = 'Veja todos os seus serviços';
+            return (<FaCalendarCheck className="icon-sub-title" />)
+        }       
     }
 
     return(
         <div className="app-page-title ml-3 px-3 py-4 mb-4">
             <div className="page-title-wrapper">
-                {componentTitle()}
+                <div className="page-title-heading">
+                    <div className="page-title-icon">
+                        {infoTitleHeader()}
+                    </div>
+                    <div>{title}
+                        <div className="page-title-subheading">{subTitle}</div>
+                    </div>
+                </div>
+               
             </div>
         </div>
     )

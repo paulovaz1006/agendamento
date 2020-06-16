@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import './style.css';
-import { FiLogIn, FiFacebook, FiInstagram, FiLinkedin } from 'react-icons/fi'
+import { FiFacebook, FiInstagram, FiLinkedin } from 'react-icons/fi'
 import logoImg from '../../assets/images/logo.png';
 import { Link, useHistory } from 'react-router-dom';
 // import api from '../../../services/api';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const Login = () => {
     const [ email, setEmail ]= useState('');

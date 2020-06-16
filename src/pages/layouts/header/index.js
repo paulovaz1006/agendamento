@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiMenu, FiLogOut } from 'react-icons/fi';
-import { FaUser, FaCog, FaSign, FaBell } from 'react-icons/fa';
+import { FaCog, FaBell } from 'react-icons/fa';
 import './style.css';
 
 const Header = (props) => {

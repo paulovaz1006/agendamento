@@ -4,8 +4,14 @@ import Logo from '../../../assets/images/logo.png';
 import RegisterSchedule from '../../schedules/registerSchedule/modal/';
 import RegisterClients from '../../myClients/registerClients/';
 import './style.css';
-import { FiDatabase } from 'react-icons/fi';
-import { FaTachometerAlt, FaUsers, FaCalendarCheck, FaBook, FaDollarSign, FaSignOutAlt } from 'react-icons/fa';
+import { 
+  FaTachometerAlt, 
+  FaUsers, 
+  FaCalendarCheck, 
+  FaBook, 
+  FaDollarSign, 
+  FaSignOutAlt 
+} from 'react-icons/fa';
 
 const SideBar = () => {
 
