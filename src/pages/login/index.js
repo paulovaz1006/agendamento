@@ -2,12 +2,25 @@ import React, { useState } from 'react';
 import './style.css';
 import { FiFacebook, FiInstagram, FiLinkedin } from 'react-icons/fi'
 import logoImg from '../../assets/images/logo.png';
+import Main from '../../assets/js/main';
 import { Link, useHistory } from 'react-router-dom';
-// import api from '../../../services/api';
+import api from '../../services/api';
 
 const Login = () => {
-    const [ email, setEmail ]= useState('');
-    const [ password, setPassword ]= useState('');
+    const main = new Main();
+    const [ emailLogin, setEmailLogin ]= useState('');
+    const [ passwordLogin, setPasswordLogin ]= useState('');
+
+    const [ fullName, setFullName ] = useState('');
+    const [ phone, setPhone ] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ cpf, setCpf ] = useState('');
+    const [ address, setAddress ] = useState('');
+    const [ number, setNumber ] = useState('');
+    const [ city, setCity ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ passwordConfirm, setPasswordConfirm ] = useState('');
+    const [ company, setCompany ] = useState(''); 
 
       const history = useHistory();
 
@@ -52,6 +65,27 @@ const Login = () => {
         }
     }
 
+    const registerUser = (e) => {
+        const validInput = main.validInput(e, '#form-register');
+
+        if (validInput) {
+            const user = {
+                full_name: fullName, 
+                phone: phone, 
+                email: email, 
+                cpf: cpf, 
+                address: address, 
+                number: number, 
+                city: city, 
+                password: password,  
+                type_user: 2,               
+                company: company 
+            }   
+
+            // api.post('user', user)
+        }
+    }
+
     return(
         <div className="logon-container">
             <div className="col-md-4 div-social">
@@ -82,32 +116,103 @@ const Login = () => {
                 <Link to="/" className="mt-4">
                     <img src={logoImg} alt="Heroes" className="herosImg"/>
                 </Link>
-                <form id="form-login" className="max-width-login">
-                    <input placeholder="E-mail"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)} />
-                    <input type="password" placeholder="Senha"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)} />
+                <form id="form-login" className="max-width-login" autoComplete="off">
+                    <div className="col-md-12 p-0">
+                        <input placeholder="E-mail"
+                            value={emailLogin}
+                            onChange={e => setEmailLogin(e.target.value)} />
+                    </div>
+                    <div className="col-md-12 p-0">
+                        <input type="password" placeholder="Senha"
+                            value={passwordLogin}
+                            onChange={e => setPasswordLogin(e.target.value)} />
+                    </div>
                     <button className="button" type="submit" onClick={loga}>Entrar</button>
                 </form>
-                <form id="form-register" className="d-none max-width-login">
-                    <input placeholder="Nome"
+                <form id="form-register" className="d-none max-width-login" autoComplete="off">
+                    <div className="col-md-12 p-0">
+                        <input type="text" 
+                            className="form-control input-required" 
+                            placeholder="Nome Completo*"
+                            data-required="Nome Completo"
+                            value={fullName}
+                            onChange={e => setFullName(e.target.value)}/>
+                    </div>    
+                    <div className="col-md-12 p-0">
+                        <input type="text" 
+                            className="form-control input-required"
+                            placeholder="CPF*"
+                            data-required="CPF"
+                            value={cpf}
+                            onChange={e => setCpf(e.target.value)}/>
+                    </div>
+                    <div className="col-md-12 p-0">
+                        <input type="text" 
+                            className="form-control input-required" 
+                            placeholder="Telefone*"
+                            data-required="Telefone"
+                            value={phone}
+                            onChange={e => setPhone(e.target.value)}/>
+                    </div>                                       
+                    <div className="col-md-12 p-0">
+                        <input type="text" 
+                            className="form-control input-required" 
+                            placeholder="Cidade*"
+                            data-required="Cidade"
+                            value={city}
+                            onChange={e => setCity(e.target.value)}/>
+                    </div>
+                    <div className="col-md-12 p-0">
+                        <input type="text" 
+                            className="form-control input-required" 
+                            placeholder="Endereço*"
+                            data-required="Endereço"
+                            value={address}
+                            onChange={e => setAddress(e.target.value)}/>
+                    </div>
+                    <div className="col-md-12 p-0">
+                        <input type="text" 
+                            className="form-control input-required"
+                            placeholder="Número"
+                            data-required="Número"
+                            value={number}
+                            onChange={e => setNumber(e.target.value)}/>
+                    </div>  
+                    <div className="col-md-12 p-0">
+                        <input type="text" 
+                            className="form-control input-required"
+                            placeholder="Empresa*"
+                            data-required="Empresa"
+                            value={company}
+                            onChange={e => setCompany(e.target.value)}/>
+                    </div>
+                    <div className="col-md-12 p-0">
+                        <input type="email" 
+                            className="form-control input-required" 
+                            placeholder="E-mail*"
+                            data-required="E-mail"
                             value={email}
-                            onChange={e => setEmail(e.target.value)} />
-                    <input placeholder="Empresa"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)} />
-                    <input type="password" placeholder="E-mail"
+                            onChange={e => setEmail(e.target.value)}/>
+                    </div>    
+                    <div className="col-md-12 p-0">
+                        <input type="password" 
+                            className="form-control input-required"
+                            placeholder="Senha*"
+                            data-required="Senha"
                             value={password}
-                            onChange={e => setPassword(e.target.value)} />
-                    <input type="password" placeholder="Senha"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)} />
-                    <input type="password" placeholder="Repita a Senha"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)} />
-                    <button className="button" type="submit" onClick={loga}>Cadastrar</button>
+                            onChange={e => setPassword(e.target.value)}/>
+                    </div>
+                    <div className="col-md-12 p-0">
+                        <input type="password" 
+                            className="form-control input-required"
+                            placeholder="Repita a Senha*"
+                            data-required="Repita a Senha"
+                            value={passwordConfirm}
+                            onChange={e => setPasswordConfirm(e.target.value)}/>
+                    </div>
+                    <div className="row justify-content-center flex-column align-items-center">
+                        <button className="button" type="submit" onClick={registerUser}>Cadastrar</button>                       
+                    </div>
                 </form>
             </div>
         </div>

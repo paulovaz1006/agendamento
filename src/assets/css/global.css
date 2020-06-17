@@ -25,10 +25,11 @@ form input {
   height: 40px;
   color: #333;
   border: none;
-  border-bottom: 1px solid #dcdce6;
-  border-radius: 0;
-  padding: 8px;
-  margin-top: 10px;
+  border-radius: 0!important;
+  padding: 2px 0!important;
+  margin-top: 8px;
+  border: none!important;
+  border-bottom: 1px solid #dcdce6!important;
 }
 form select {
   margin-top: 10px;
@@ -54,7 +55,10 @@ form textarea {
 button {
   cursor: pointer;
 }
-
+.text-danger {
+  font-size: 12px;
+  margin-top: 5px;
+}
 .button {
   cursor: pointer;
   width: 100%;
