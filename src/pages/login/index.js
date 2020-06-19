@@ -4,6 +4,9 @@ import { FiFacebook, FiInstagram, FiLinkedin } from 'react-icons/fi'
 import logoImg from '../../assets/images/logo.png';
 import Main from '../../assets/js/main';
 import { Link, useHistory } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import InputMask from "react-input-mask";
+import 'react-toastify/dist/ReactToastify.min.css'; 
 import api from '../../services/api';
 
 const Login = () => {
@@ -22,27 +25,39 @@ const Login = () => {
     const [ passwordConfirm, setPasswordConfirm ] = useState('');
     const [ company, setCompany ] = useState(''); 
 
-      const history = useHistory();
+    const history = useHistory();
 
-      const loga = (e) => {
+    const loga = async (e, emailUser, passwordUser) => {
         e.preventDefault();
-            history.push('/dashboard');
-      }
-    // const history = useHistory('');
 
-    // async function handleLogin(e) {
-    //     e.preventDefault();
+        const userLogin = {
+            email: emailUser,
+            password: passwordUser
+        } 
 
-    //     try {
-    //         const response = await api.post('sessions', { id });
-    //         console.log(response.data.nome)
-    //         localStorage.setItem('ongId', id);
-    //         localStorage.setItem('ongName', response.data.nome);
-    //         history.push('/profile');
-    //     } catch {
-    //         alert('Falha no login, tente novamente')
-    //     }
-    // }
+        try{
+            const response = await api.post('login', userLogin)
+
+            if (response.statusText === "OK"){
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('id', response.data.user.id_user);
+                localStorage.setItem('type', response.data.user.type_user);
+                localStorage.setItem('company', response.data.user.id_company);
+                
+                toast.success('Login realizado com sucesso', {
+                    autoClose: 3000,                    
+                });
+
+                setTimeout(() => {
+                    history.push('/dashboard');
+                }, 3000);                
+            }           
+        } catch(error) {
+            toast.error('E-mail ou senha errado', {
+                autoClose: 8000,                    
+            });
+        } 
+    }
 
     const showForm = (e) => {
         const formLogin = document.querySelector('#form-login');
@@ -67,27 +82,41 @@ const Login = () => {
 
     const registerUser = (e) => {
         const validInput = main.validInput(e, '#form-register');
+        const validPassword = main.validPassword(e, '#form-register');
+       
+        if (validInput && validPassword) {
 
-        if (validInput) {
-            const user = {
+            let user = {
                 full_name: fullName, 
-                phone: phone, 
+                phone: phone.replace(/[^\d]+/g,''), 
                 email: email, 
-                cpf: cpf, 
+                cpf: cpf.replace(/[^\d]+/g,''), 
                 address: address, 
                 number: number, 
                 city: city, 
                 password: password,  
                 type_user: 2,               
                 company: company 
-            }   
+            }    
 
-            // api.post('user', user)
+            try{
+                api.post('user', user)
+                toast.success('Cadastro realizado com sucesso, você será logado automaticamente', {
+                    autoClose: 5000,                    
+                });
+
+                setTimeout(() => {
+                      loga(e, email, password)
+                }, 5000);
+            } catch(error) {
+                toast.error(error.response.data.message);
+            } 
         }
     }
 
     return(
         <div className="logon-container">
+            <ToastContainer />
             <div className="col-md-4 div-social">
                 <h5 className="text-white mt-4">Redes Sociais</h5>
                 <ul className="list-social">
@@ -127,7 +156,7 @@ const Login = () => {
                             value={passwordLogin}
                             onChange={e => setPasswordLogin(e.target.value)} />
                     </div>
-                    <button className="button" type="submit" onClick={loga}>Entrar</button>
+                    <button className="button" type="submit" onClick={(e) => loga(e, emailLogin, passwordLogin)}>Entrar</button>
                 </form>
                 <form id="form-register" className="d-none max-width-login" autoComplete="off">
                     <div className="col-md-12 p-0">
@@ -138,21 +167,27 @@ const Login = () => {
                             value={fullName}
                             onChange={e => setFullName(e.target.value)}/>
                     </div>    
-                    <div className="col-md-12 p-0">
-                        <input type="text" 
+                    <div className="col-md-12 p-0">                        
+                        <InputMask
+                            type="text" 
                             className="form-control input-required"
                             placeholder="CPF*"
                             data-required="CPF"
                             value={cpf}
-                            onChange={e => setCpf(e.target.value)}/>
+                            onChange={e => setCpf(e.target.value)}
+                            mask="999.999.999-99"  
+                        />
                     </div>
                     <div className="col-md-12 p-0">
-                        <input type="text" 
+                        <InputMask
+                            type="text" 
                             className="form-control input-required" 
-                            placeholder="Telefone*"
-                            data-required="Telefone"
+                            placeholder="Celular*"
+                            data-required="Celular"
                             value={phone}
-                            onChange={e => setPhone(e.target.value)}/>
+                            onChange={e => setPhone(e.target.value)}    
+                            mask="(99) 99999-9999"     
+                        />
                     </div>                                       
                     <div className="col-md-12 p-0">
                         <input type="text" 
@@ -196,7 +231,7 @@ const Login = () => {
                     </div>    
                     <div className="col-md-12 p-0">
                         <input type="password" 
-                            className="form-control input-required"
+                            className="form-control input-required input-password"
                             placeholder="Senha*"
                             data-required="Senha"
                             value={password}
@@ -204,7 +239,7 @@ const Login = () => {
                     </div>
                     <div className="col-md-12 p-0">
                         <input type="password" 
-                            className="form-control input-required"
+                            className="form-control input-required input-confirm-password"
                             placeholder="Repita a Senha*"
                             data-required="Repita a Senha"
                             value={passwordConfirm}

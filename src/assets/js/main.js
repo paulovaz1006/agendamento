@@ -24,6 +24,32 @@ class Main {
         
         return (ct === 0) ? true : false;
     }
+
+    validPassword(e, form) {
+        e.preventDefault();
+
+        const inputPassword = document.querySelector('.input-password', form);
+        const inputConfirmPassword = document.querySelector('.input-confirm-password', form);
+        let ct = 0;
+        
+        if (inputPassword.value !== '' && inputConfirmPassword.value !== '') {   
+            if (inputPassword.value !== inputConfirmPassword.value) {             
+                let p = document.createElement('p');                           
+    
+                p.classList.add('text-danger');
+                p.innerHTML = 'Campo Repita a Senha é diferente de senha';
+
+                if (inputConfirmPassword.nextElementSibling === null) {
+                    inputConfirmPassword.closest('div').append(p);
+                    ct++;
+                } else if (inputConfirmPassword.nextElementSibling !== null){
+                    inputConfirmPassword.nextElementSibling.innerHTML = '';
+                }   
+            }
+        }
+
+        return (ct === 0) ? true : false;
+    }
 }
 
 export default Main;
