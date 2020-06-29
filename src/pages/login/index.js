@@ -44,13 +44,8 @@ const Login = () => {
                 localStorage.setItem('type', response.data.user.type_user);
                 localStorage.setItem('company', response.data.user.id_company);
                 
-                toast.success('Login realizado com sucesso', {
-                    autoClose: 3000,                    
-                });
-
-                setTimeout(() => {
-                    history.push('/dashboard');
-                }, 3000);                
+                toast.success('Login realizado com sucesso');
+                history.push('/dashboard');            
             }           
         } catch(error) {
             toast.error('E-mail ou senha errado', {

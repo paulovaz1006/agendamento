@@ -18,6 +18,10 @@ const titleHeader = (props) => {
             title = 'Meus Clientes';
             subTitle = 'Veja todos os seus clientes e suas informações';
             return (<FaUsers className="icon-sub-title" />)
+        } else if (props.componentTitle === 'registerNewClient') {
+            title = 'Cadastro de novo cliente';
+            subTitle = 'Cadastre o seu novo clientes para que ele(a) possa agendar com você';
+            return (<FaUsers className="icon-sub-title" />)
         } else if (props.componentTitle === 'confirmAppointments') {
             title = 'Confirmar Agendamentos';
             subTitle = 'Veja todos os seus pré agendamentos';

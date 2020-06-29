@@ -9,3 +9,9 @@
 .fc-event{
     cursor: pointer;
 }
+.item-finish{
+    text-decoration: line-through;  
+}
+.item-finish input{
+    opacity: 0.2;  
+}

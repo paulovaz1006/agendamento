@@ -1,10 +1,23 @@
 import React from 'react';
+import api from '../../../services/api';
+import { toast } from 'react-toastify';
 
 const DeleteClient = (props) => {
 
     const closeModalContactClient = () => {
         let modal = document.querySelector('#modalDeleteClient');
         modal.style.display = 'none';
+    }
+
+    const deleteClient = (id) => {
+        api.delete(`user/${id}`)
+            .then(() => {
+                toast.success('Cliente deletado com sucesso');
+                closeModalContactClient();
+            })
+            .catch(() => {
+                toast.error('Erro ao deletar cliente');
+            });
     }
 
     return(
@@ -16,13 +29,10 @@ const DeleteClient = (props) => {
                         <button type="button" className="close" onClick={closeModalContactClient}>
                         <span aria-hidden="true">&times;</span>
                         </button>
-                        <form>
-                            <input type="hidden" value={props.id}/>
-                        </form>
                     </div>
                     <div className="modal-footer justify-content-between">
                         <button type="button" className="btn-secundary-schedule border-0" onClick={closeModalContactClient}>Cancelar</button>
-                        <button type="button" className="btn-primary-schedule border-0">Confirmar</button>
+                        <button type="button" className="btn-primary-schedule border-0" onClick={() => deleteClient(props.id)}>Confirmar</button>
                     </div>
                 </div>
             </div>

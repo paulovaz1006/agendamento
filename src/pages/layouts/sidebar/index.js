@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../../assets/images/logo.png';
-import RegisterSchedule from '../../schedules/registerSchedule/modal/';
-import RegisterClients from '../../myClients/registerClients/';
 import './style.css';
 import { 
   FaTachometerAlt, 
@@ -14,19 +12,6 @@ import {
 } from 'react-icons/fa';
 
 const SideBar = () => {
-
-    const openModalRegisterSchedule = (e) => {
-      let modal = document.querySelector('#modalRegisterSchedule');
-      e.preventDefault();
-      modal.style.display = 'block';
-    }
-
-    const openModalRegisterClient = (e) => {
-      let modal = document.querySelector('#modalRegisterClient');
-      e.preventDefault();
-      modal.style.display = 'block';
-    }
-
     return(
         <div id="sidebar-wrapper">
           <div className="sidebar-heading bg-header-sidebar mb-3">
@@ -48,16 +33,13 @@ const SideBar = () => {
               <ul>
                 <li>
                   <Link to="/meus-clientes" className="list-group-item list-group-item-action border-0">Meus Clientes</Link>
-                  <Link to="#" className="list-group-item list-group-item-action border-0" onClick={openModalRegisterClient}>Cadastrar Cliente</Link>
+                  <Link to="/cadastrar-cliente" className="list-group-item list-group-item-action border-0">Cadastrar Cliente</Link>
                 </li>
               </ul>
             </div>
             <div className="box-sidebar">
               <span><FaBook /> Serviços</span>
               <ul>
-                <li>
-                  <Link to="/dashboard" className="list-group-item list-group-item-action border-0">Ver Serviços</Link>
-                </li>
                 <li>
                   <Link to="/lista-de-servicos" className="list-group-item list-group-item-action border-0">Lista de Serviços</Link>
                 </li>
@@ -67,7 +49,7 @@ const SideBar = () => {
               <span><FaCalendarCheck /> Agendamentos</span>
               <ul>
                 <li>
-                  <Link to="#" className="list-group-item list-group-item-action border-0" onClick={openModalRegisterSchedule}>Agendar Cliente</Link>
+                  <Link to="/agendar-cliente" className="list-group-item list-group-item-action border-0">Agendar Cliente</Link>
                 </li>
                 <li>
                   <Link to="/confirmar-agendamentos" className="list-group-item list-group-item-action border-0">Confirmar Agendamentos</Link>
@@ -94,8 +76,6 @@ const SideBar = () => {
               </ul>
             </div>
           </div>
-          <RegisterSchedule />
-          <RegisterClients />
         </div>
     )
 }
