@@ -5,7 +5,7 @@ import api from '../../../services/api';
 import SideBar from '../../layouts/sidebar';
 import Header from '../../layouts/header';
 import TitleHeader from '../../layouts/titleHeader';
-import localItems from '../../../services/local-item';
+import LocalItems from '../../../services/localItem';
 import { toast, ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
@@ -17,25 +17,24 @@ const RegisterClients = () => {
     const [ address, setAddress ] = useState('');
     const [ number, setNumber ] = useState('');
     const [ city, setCity ] = useState('');
-    const main = new Main();
 
     const registerUser = (e) => {
-        const validInput = main.validInput(e, '#form-register');
-       
+        const validInput = Main.validInput(e, '#form-register');
+
         if (validInput) {
 
             let user = {
-                full_name: fullName, 
-                phone: phone.replace(/[^\d]+/g,''), 
-                email: email, 
-                cpf: cpf.replace(/[^\d]+/g,''), 
-                address: address, 
-                number: number, 
-                city: city, 
-                password: 'padrao123',  
-                type_user: 1,               
-                id_company: localItems.company 
-            }    
+                full_name: fullName,
+                phone: phone.replace(/[^\d]+/g,''),
+                email: email,
+                cpf: cpf.replace(/[^\d]+/g,''),
+                address: address,
+                number: number,
+                city: city,
+                password: 'padrao123',
+                type_user: 1,
+                id_company: LocalItems.company
+            }
             api.post('client', user)
                 .then(() => {
                     toast.success('Cliente cadastrado com sucesso');
@@ -63,42 +62,42 @@ const RegisterClients = () => {
                 <Header/>
                 <TitleHeader componentTitle="registerNewClient"/>
                 <div className="container-fluid">
-                    <div className="bg-white p-4 rounded shadow-sm">    
+                    <div className="bg-white p-4 rounded shadow-sm">
                         <form autoComplete="off">
                             <div className="row">
                                 <div className="col">
-                                    <input type="text" 
-                                        className="form-control input-required" 
+                                    <input type="text"
+                                        className="form-control input-required"
                                         placeholder="Nome Completo*"
                                         data-required="Nome Completo"
                                         value={fullName}
                                         onChange={e => setFullName(e.target.value)}/>
-                                </div>    
-                                <div className="col">                        
+                                </div>
+                                <div className="col">
                                     <InputMask
-                                        type="text" 
+                                        type="text"
                                         className="form-control input-required"
                                         placeholder="CPF*"
                                         data-required="CPF"
                                         value={cpf}
                                         onChange={e => setCpf(e.target.value)}
-                                        mask="999.999.999-99"  
+                                        mask="999.999.999-99"
                                     />
                                 </div>
                                 <div className="col">
                                     <InputMask
-                                        type="text" 
-                                        className="form-control input-required" 
+                                        type="text"
+                                        className="form-control input-required"
                                         placeholder="Celular*"
                                         data-required="Celular"
                                         value={phone}
-                                        onChange={e => setPhone(e.target.value)}    
-                                        mask="(99) 99999-9999"     
+                                        onChange={e => setPhone(e.target.value)}
+                                        mask="(99) 99999-9999"
                                     />
-                                </div>      
+                                </div>
                                 <div className="col">
-                                    <input type="email" 
-                                        className="form-control input-required" 
+                                    <input type="email"
+                                        className="form-control input-required"
                                         placeholder="E-mail*"
                                         data-required="E-mail"
                                         value={email}
@@ -106,37 +105,37 @@ const RegisterClients = () => {
                                 </div>
                             </div>
                             <div className="row mt-3">
-                                <div className="col">                                    
-                                    <input type="text" 
-                                        className="form-control input-required" 
+                                <div className="col">
+                                    <input type="text"
+                                        className="form-control input-required"
                                         placeholder="Endereço*"
                                         data-required="Endereço"
                                         value={address}
                                         onChange={e => setAddress(e.target.value)}/>
                                 </div>
                                 <div className="col">
-                                    <input type="text" 
+                                    <input type="text"
                                         className="form-control input-required"
                                         placeholder="Número"
                                         data-required="Número"
                                         value={number}
                                         onChange={e => setNumber(e.target.value)}/>
-                                </div>  
+                                </div>
                                 <div className="col">
-                                    <input type="text" 
-                                        className="form-control input-required" 
+                                    <input type="text"
+                                        className="form-control input-required"
                                         placeholder="Cidade*"
                                         data-required="Cidade"
                                         value={city}
                                         onChange={e => setCity(e.target.value)}/>
                                 </div>
-                            </div>                            
+                            </div>
                         </form>
                     </div>
                     <div className="d-flex justify-content-between mt-3">
-                        <Link to="/meus-clientes" className="float-right btn-secundary-schedule border-0">Meus Clientes</Link>  
-                    
-                        <button className="float-right btn-primary-schedule border-0" type="submit"  onClick={registerUser}>Cadastrar Cliente</button>  
+                        <Link to="/meus-clientes" className="float-right btn-secundary-schedule border-0">Meus Clientes</Link>
+
+                        <button className="float-right btn-primary-schedule border-0" type="submit"  onClick={registerUser}>Cadastrar Cliente</button>
                     </div>
                 </div>
             </div>

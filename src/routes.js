@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/login';
 import ForgotPassword from './pages/forgotPassword';
 import Dashboard from './pages/dashboard';
@@ -14,6 +14,7 @@ import ServiceList from './pages/myServices/serviceList';
 import RegisterSchedule from './pages/schedules/registerSchedule/';
 
 export default function Routes() {
+
     return(
         <BrowserRouter>
             <Switch>
@@ -28,7 +29,7 @@ export default function Routes() {
                 <Route path="/confirmar-agendamentos" activeClassName="activeLink" component={ConfirmAppointments} />
                 <Route path="/ver-agendamentos" activeClassName="activeLink" component={Schedules} />
                 <Route path="/lista-de-servicos" activeClassName="activeLink" component={ServiceList} />
-                <Route path="/agendar-cliente" activeClassName="activeLink" component={RegisterSchedule} />                
+                <Route path="/agendar-cliente" activeClassName="activeLink" component={RegisterSchedule} />
             </Switch>
         </BrowserRouter>
     )

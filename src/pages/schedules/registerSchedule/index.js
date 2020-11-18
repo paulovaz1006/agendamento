@@ -3,11 +3,10 @@ import api from '../../../services/api';
 import SideBar from '../../layouts/sidebar';
 import Header from '../../layouts/header';
 import TitleHeader from '../../layouts/titleHeader';
-import localItems from '../../../services/local-item';
 import { toast, ToastContainer } from 'react-toastify';
 import InputMask from "react-input-mask";
 import Main from '../../../assets/js/main';
-import localItem from '../../../services/local-item';
+import LocalItems from '../../../services/localItem';
 import Select from 'react-select';
 import CurrencyInput from 'react-currency-masked-input';
 import moment from 'moment';
@@ -30,53 +29,116 @@ const RegisterSchedule = () => {
     const [ serviceName, setServiceName ] = useState('');
     const [ serviceValue, setServiceValue ] = useState('');
     const [ serviceDescription, setServiceDescription ] = useState('');
-    const [ hour, setHour ] = useState('');    
-    const idCompany = localItem.company;
-    const main = new Main();
-      
+    const [ hour, setHour ] = useState('');
+    const idCompany = LocalItems.company;
+
+    const openModalRegisterClient = () => {
+        let modal = document.querySelector('#modalRegisterClient');
+        modal.style.display = 'block';
+    }
+
+    const closeModalRegisterClient = () => {
+        let modal = document.querySelector('#modalRegisterClient');
+        modal.style.display = 'none';
+    }
+
+    const openModalRegisterService = () => {
+        let modal = document.querySelector('#modalRegisterService');
+        modal.style.display = 'block';
+    }
+
+    const closeModalRegisterService = () => {
+        let modal = document.querySelector('#modalRegisterService');
+        modal.style.display = 'none';
+    }
+
+    const getService = () => {
+        api.get(`service/${LocalItems.company}`)
+            .then((response) => {
+                let services = [];
+                let serviceItem;
+
+                response.data.map((element) => {
+                    serviceItem = {
+                        value: element.id_service,
+                        label: element.service
+                    }
+
+                    return services.push(serviceItem)
+                });
+
+                setOptionsService(services)
+        })
+    }
+
+    const getClient = () => {
+        api.get(`client/${LocalItems.company}`)
+            .then((response) => {
+                let clients = [];
+                let clientItem;
+
+                response.data.map((element, index) => {
+                    clientItem = {
+                        value: element.id_user,
+                        label: element.full_name
+                    }
+
+                    return clients.push(clientItem)
+                });
+
+                setOptionsClient(clients)
+        })
+    }
+
     const registerSchedule = () => {
-        const idCompany = parseInt(localItems.company);   
-        const formatData = moment(date).format('YYYY-MM-DD');     
+        const idCompany = parseInt(LocalItems.company);
+        const formatData = moment(date).format('YYYY-MM-DD');
         const formatHour = hour;
         const infoDate = `${formatData} ${formatHour}`;
 
         const data = {
-            title: title, 
-            description: description, 
-            date: infoDate, 
+            title: title,
+            description: description,
+            date: infoDate,
             id_user: clientName,
             id_company: idCompany,
             id_service: service,
             id_type_schedule: 2,
         }
-        console.log(data)
 
         api.post('schedule', data)
             .then((response) => {
-                toast.success(response.data.message)
+                toast.success(response.data.message);
+                setDate('');
+                setHour('');
+                setTitle('');
+                setClientName('')
+                setDescription('');
+                setService('')
             })
             .catch((response) => {
                 toast.error('Erro no agendamento')
-            }); 
+            });
     }
-    
+
     const registerUser = (e) => {
-        const validInput = main.validInput(e, '#form-register-client');
-       
+        const validInput = Main.validInput(e, '#form-register-client');
+
         if (validInput) {
 
             let user = {
-                full_name: fullName, 
-                phone: phone.replace(/[^\d]+/g,''), 
-                email: email, 
-                cpf: cpf.replace(/[^\d]+/g,''), 
-                address: address, 
-                number: number, 
-                city: city, 
-                password: 'padrao123',  
-                type_user: 1,               
-                id_company: localItems.company 
-            }    
+                full_name: fullName,
+                phone: phone.replace(/[^\d]+/g,''),
+                email: email,
+                cpf: cpf.replace(/[^\d]+/g,''),
+                address: address,
+                number: number,
+                city: city,
+                password: 'padrao123',
+                type_user: 1,
+                id_company: LocalItems.company
+            }
+
             api.post('client', user)
                 .then(() => {
                     toast.success('Cliente cadastrado com sucesso');
@@ -98,7 +160,7 @@ const RegisterSchedule = () => {
         }
     }
 
-    const registerService = () => {        
+    const registerService = () => {
         const formatValue = parseFloat(serviceValue.replace(',', '.'));
 
         const data = {
@@ -122,65 +184,6 @@ const RegisterSchedule = () => {
             });
     }
 
-
-    const openModalRegisterClient = () => {
-        let modal = document.querySelector('#modalRegisterClient');
-        modal.style.display = 'block';
-    }
-
-    const closeModalRegisterClient = () => {
-        let modal = document.querySelector('#modalRegisterClient');
-        modal.style.display = 'none';
-    }
-
-    const openModalRegisterService = () => {
-        let modal = document.querySelector('#modalRegisterService');
-        modal.style.display = 'block';
-    }
-
-    const closeModalRegisterService = () => {
-        let modal = document.querySelector('#modalRegisterService');
-        modal.style.display = 'none';
-    }
-
-    const getService = () => {
-        api.get(`service/${localItems.company}`)
-            .then((response) => {
-                let services = [];
-                let serviceItem;
-
-                response.data.map((element) => {                    
-                    serviceItem = {
-                        value: element.id_service,
-                        label: element.service
-                    }
-
-                    return services.push(serviceItem)
-                });
-
-                setOptionsService(services)
-        })
-    }
-
-    const getClient = () => {
-        api.get(`client/${localItems.company}`)
-            .then((response) => {
-                let clients = [];
-                let clientItem;
-
-                response.data.map((element, index) => {
-                    clientItem = {
-                        value: element.id_user,
-                        label: element.full_name
-                    }
-
-                    return clients.push(clientItem)
-                });
-
-                setOptionsClient(clients)
-        })
-    }
-
     useEffect(() => {
         getService();
         getClient();
@@ -194,32 +197,32 @@ const RegisterSchedule = () => {
                 <Header/>
                 <TitleHeader componentTitle="registerNewClient"/>
                 <div className="container-fluid">
-                    <div className="bg-white p-4 rounded shadow-sm">    
+                    <div className="bg-white p-4 rounded shadow-sm">
                         <form autoComplete="off">
                             <div className="row">
                                 <div className="col">
-                                    <input onChange={e => setTitle(e.target.value)} placeholder="Titulo"/>
-                                </div>    
-                            </div>             
+                                    <input onChange={e => setTitle(e.target.value)} value={title} placeholder="Titulo"/>
+                                </div>
+                            </div>
                         </form>
                         <div className="row mt-3">
                             <div className="col">
                                 <label>Selecione seu Cliente:</label>
                                 <Select options={optionsClient} className="client" onChange={e => setClientName(e.value)}/>
-                            </div>    
-                            <div className="col">   
-                                <label>Data de Atendimento:</label>                   
+                            </div>
+                            <div className="col">
+                                <label>Data de Atendimento:</label>
                                 <input
-                                    type="date" 
+                                    type="date"
                                     className="form-control"
                                     value={date}
                                     onChange={e => setDate(e.target.value)}
                                 />
                             </div>
-                            <div className="col">   
-                                <label>Data de Atendimento:</label>                   
+                            <div className="col">
+                                <label>Horário de Atendimento:</label>
                                 <input
-                                    type="time" 
+                                    type="time"
                                     className="form-control"
                                     value={hour}
                                     onChange={e => setHour(e.target.value)}
@@ -228,23 +231,23 @@ const RegisterSchedule = () => {
                             <div className="col">
                                 <label>Selecione seu Serviço:</label>
                                 <Select options={optionsService} className="service" onChange={e => setService(e.value)}/>
-                            </div> 
-                        </div>       
-                        <form autoComplete="off">  
+                            </div>
+                        </div>
+                        <form autoComplete="off">
                             <div className="row mt-3">
                                 <div className="col">
                                     <label>Descrição</label>
                                     <textarea onChange={e => setDescription(e.target.value)} value={description} />
-                                </div>    
-                            </div>                          
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div className="d-flex justify-content-between mt-3">
                         <div className="d-flex justify-content-between">
-                            <button className="float-right btn-secundary-schedule border-0 mr-4" onClick={openModalRegisterClient}>Cadastrar Cliente</button>     
-                            <button className="float-right btn-secundary-schedule border-0" onClick={openModalRegisterService}>Cadastrar Serviço</button>     
+                            <button className="float-right btn-secundary-schedule border-0 mr-4" onClick={openModalRegisterClient}>Cadastrar Cliente</button>
+                            <button className="float-right btn-secundary-schedule border-0" onClick={openModalRegisterService}>Cadastrar Serviço</button>
                         </div>
-                        <button className="float-right btn-primary-schedule border-0" type="submit" onClick={registerSchedule}>Agendar</button>  
+                        <button className="float-right btn-primary-schedule border-0" type="submit" onClick={registerSchedule}>Agendar</button>
                     </div>
                 </div>
             </div>
@@ -261,38 +264,38 @@ const RegisterSchedule = () => {
                         <form autoComplete="off" id="form-register-client">
                             <div className="row">
                                 <div className="col">
-                                    <input type="text" 
-                                        className="form-control input-required" 
+                                    <input type="text"
+                                        className="form-control input-required"
                                         placeholder="Nome Completo*"
                                         data-required="Nome Completo"
                                         value={fullName}
                                         onChange={e => setFullName(e.target.value)}/>
-                                </div>    
-                                <div className="col">                        
+                                </div>
+                                <div className="col">
                                     <InputMask
-                                        type="text" 
+                                        type="text"
                                         className="form-control input-required"
                                         placeholder="CPF*"
                                         data-required="CPF"
                                         value={cpf}
                                         onChange={e => setCpf(e.target.value)}
-                                        mask="999.999.999-99"  
+                                        mask="999.999.999-99"
                                     />
                                 </div>
                                 <div className="col">
                                     <InputMask
-                                        type="text" 
-                                        className="form-control input-required" 
+                                        type="text"
+                                        className="form-control input-required"
                                         placeholder="Celular*"
                                         data-required="Celular"
                                         value={phone}
-                                        onChange={e => setPhone(e.target.value)}    
-                                        mask="(99) 99999-9999"     
+                                        onChange={e => setPhone(e.target.value)}
+                                        mask="(99) 99999-9999"
                                     />
-                                </div>      
+                                </div>
                                 <div className="col">
-                                    <input type="email" 
-                                        className="form-control input-required" 
+                                    <input type="email"
+                                        className="form-control input-required"
                                         placeholder="E-mail*"
                                         data-required="E-mail"
                                         value={email}
@@ -300,31 +303,31 @@ const RegisterSchedule = () => {
                                 </div>
                             </div>
                             <div className="row mt-3">
-                                <div className="col">                                    
-                                    <input type="text" 
-                                        className="form-control input-required" 
+                                <div className="col">
+                                    <input type="text"
+                                        className="form-control input-required"
                                         placeholder="Endereço*"
                                         data-required="Endereço"
                                         value={address}
                                         onChange={e => setAddress(e.target.value)}/>
                                 </div>
                                 <div className="col">
-                                    <input type="text" 
+                                    <input type="text"
                                         className="form-control input-required"
                                         placeholder="Número"
                                         data-required="Número"
                                         value={number}
                                         onChange={e => setNumber(e.target.value)}/>
-                                </div>  
+                                </div>
                                 <div className="col">
-                                    <input type="text" 
-                                        className="form-control input-required" 
+                                    <input type="text"
+                                        className="form-control input-required"
                                         placeholder="Cidade*"
                                         data-required="Cidade"
                                         value={city}
                                         onChange={e => setCity(e.target.value)}/>
                                 </div>
-                            </div>                            
+                            </div>
                         </form>
                         </div>
                         <div className="modal-footer justify-content-between">

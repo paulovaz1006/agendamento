@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../../assets/images/logo.png';
+import { useHistory } from 'react-router-dom';
 import './style.css';
 import { 
   FaTachometerAlt, 
@@ -12,6 +13,13 @@ import {
 } from 'react-icons/fa';
 
 const SideBar = () => {
+  const history = useHistory();
+
+  const clearStorage = () => {
+    localStorage.clear();
+    history.push('/');
+  }
+
     return(
         <div id="sidebar-wrapper">
           <div className="sidebar-heading bg-header-sidebar mb-3">
@@ -71,7 +79,7 @@ const SideBar = () => {
               <span><FaSignOutAlt /> Logout</span>
               <ul>
                 <li>
-                  <Link to="/" className="list-group-item list-group-item-action border-0">Sair</Link>
+                  <Link to="#" className="list-group-item list-group-item-action border-0" onClick={() => clearStorage()}>Sair</Link>
                 </li>
               </ul>
             </div>

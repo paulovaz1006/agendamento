@@ -6,7 +6,7 @@ import { FaWhatsapp, FaEnvelope } from 'react-icons/fa';
 import ModalClient from './modal/contactClient';
 import './style.css';
 import api from '../../services/api';
-import localItems from '../../services/local-item';
+import LocalItems from '../../services/localItem';
 import { toast, ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
@@ -15,15 +15,20 @@ const MyClients = () => {
     const [ id, setId ] = useState('');
     const [ clients, setClients ] = useState([]);
 
-    const getClients = () => {      
-        api.get(`client/${localItems.company}`)
+    const getClients = () => {
+        api.get(`client/${LocalItems.company}`)
             .then((response) => {
                 setClients(response.data)
             });
     }
- 
+
     const closeModalContactClient = () => {
         let modal = document.querySelector('#modalDeleteClient');
+        modal.style.display = 'none';
+    }
+
+    const closeModalUpdateClient = () => {
+        let modal = document.querySelector('#modalUpdateClient');
         modal.style.display = 'none';
     }
 
@@ -53,7 +58,7 @@ const MyClients = () => {
         modal.style.display = 'block';
         setId(id);
         setName(name);
-    }  
+    }
 
     const deleteClient = (id) => {
         api.delete(`user/${id}`)
@@ -66,7 +71,7 @@ const MyClients = () => {
                 toast.error('Erro ao deletar cliente');
             });
     }
-   
+
     useEffect(() => {
         getClients();
     }, [])
@@ -96,10 +101,10 @@ const MyClients = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {clients.map((data) => {                                    
+                                {clients.map((data) => {
 
                                     const formatPhone = data.phone.replace(/^(\d{2})(\d{5})/g,"($1) $2-");
-                                    
+
                                     const liWhatsapp = () => {
                                         if (data.phone.length === 11) {
                                             return (
@@ -141,7 +146,7 @@ const MyClients = () => {
                                             </td>
                                             <td className="actions-clients">
                                                 <ul>
-                                                    <li className="d-none">
+                                                    <li>
                                                         <button onClick={() => openModalUpdateClient(data.id_user, data.full_name)}>
                                                             <span>Alterar</span>
                                                         </button>
@@ -175,6 +180,58 @@ const MyClients = () => {
                         <div className="modal-footer justify-content-between">
                             <button type="button" className="btn-secundary-schedule border-0" onClick={closeModalContactClient}>Cancelar</button>
                             <button type="button" className="btn-primary-schedule border-0" onClick={() => deleteClient(id)}>Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="modal bd-example-modal-lg" id="modalUpdateClient">
+                <div className="modal-dialog modal-lg" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Informação do Agendamento</h5>
+                            <button type="button" className="close" onClick={closeModalUpdateClient}>
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="col-md-12 p-0">
+                                <div className="row">
+                                    <div className="col">
+                                        <label>Nome do Cliente: <span className="font-weight-normal"> </span></label>
+                                    </div>
+                                    <div className="col">
+                                        <label>Serviço: <span className="font-weight-normal"> </span></label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col">
+                                        <label>Data: <span className="font-weight-normal"> </span></label>
+                                    </div>
+                                    <div className="col">
+                                        <label>Hora: <span className="font-weight-normal"> </span></label>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col">
+                                        <label>Titulo: <span className="font-weight-normal"> </span></label>
+                                    </div>
+                                    <div className="col">
+                                        <label>Descrição: <span className="font-weight-normal"> </span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h6 className="mb-0">Reagendar</h6>
+                                <form>
+                                    <div className="row">
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div className="modal-footer justify-content-between">
+                            <button type="button" className="btn-secundary-schedule border-0" onClick={closeModalUpdateClient}>Cancelar</button>
+                            <button type="button" className="btn-primary-schedule border-0">Reagendar</button>
                         </div>
                     </div>
                 </div>

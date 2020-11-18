@@ -2,13 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiMenu, FiLogOut } from 'react-icons/fi';
 import { FaCog, FaBell } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
 import './style.css';
 
 const Header = (props) => {
+    const history = useHistory();
 
     const toggleMenu = () => {
         const wrapper = document.querySelector('#wrapper');
         wrapper.classList.toggle('toggled');
+    }
+
+    const clearStorage = () => {
+        localStorage.clear();
+        history.push('/');
     }
 
     return(
@@ -23,7 +30,7 @@ const Header = (props) => {
                         <Link className="nav-link" to="#"><FaCog color={"#fff"} fontSize={18}/></Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/"><FiLogOut color={"#fff"} fontSize={18}/></Link>
+                        <Link className="nav-link" to="#" onClick={() => clearStorage()}><FiLogOut color={"#fff"} fontSize={18}/></Link>
                     </li>
                 </ul>
             </div>

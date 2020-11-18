@@ -4,7 +4,7 @@ import Header from '../../layouts/header';
 import TitleHeader from '../../layouts/titleHeader';
 import { Link } from 'react-router-dom';
 import api from '../../../services/api';
-import localItem from '../../../services/local-item';
+import LocalItem from '../../../services/localItem';
 import { toast, ToastContainer } from 'react-toastify';
 import CurrencyInput from 'react-currency-masked-input'
 
@@ -18,7 +18,7 @@ const ServiceList = () => {
     const [ updateValue, setUpdateValue ] = useState('');
     const [ updateDescription, setUpdateDescription ] = useState('');
     const [ service, setService ] = useState([]);
-    const idCompany = localItem.company;
+    const idCompany = LocalItem.company;
 
     const openModalRegisterService = () => {
         let modal = document.querySelector('#modalRegisterService');
@@ -37,7 +37,7 @@ const ServiceList = () => {
     //     modal.style.display = 'block';
     //     setId(id);
     //     setName(name);
-    //     setUpdateName(name);        
+    //     setUpdateName(name);
     //     setUpdateValue(value);
     //     setUpdateDescription(description);
     // }
@@ -88,7 +88,7 @@ const ServiceList = () => {
         })
     }
 
-    const registerService = () => {        
+    const registerService = () => {
         const formatValue = parseFloat(serviceValue.replace(',', '.'));
 
         const data = {
@@ -145,7 +145,7 @@ const ServiceList = () => {
                                         const service = data.service;
                                         const description = data.description;
 
-                                        return(                                            
+                                        return(
                                             <tr key={idService}>
                                                 <td>{service}</td>
                                                 <td>{value}</td>
